@@ -2,16 +2,6 @@ import java.util.ArrayList;
 
 class TicTacToeBoard
 {
-  /*
-    R0: 0 1 2
-    R1: 0 1 2
-    R2: 0 1 2
-
-    check any rows: R0: 0 1 2 / R1: 0 1 2 / R2: 0 1 2
-    check columns: R0-2: 0 0 0 / 1 1 1 / 2 2 2
-    check diagonals: R0-2: 0 1 2 / R2-0: 0 1 2
-  */
-
   ArrayList<Integer> R0;
   ArrayList<Integer> R1;
   ArrayList<Integer> R2;
@@ -54,6 +44,40 @@ class TicTacToeBoard
     System.out.println(" " + playerCharacters.get(R2.get(0)) + " | " + playerCharacters.get(R2.get(1)) + " | " + playerCharacters.get(R2.get(2)) + " ");
     System.out.println("");
   }
+
+  private boolean checkRowWinner(ArrayList<Integer> Row)
+  {
+    for (Integer row : Row) {
+      if (row == 0) {
+        return false;
+      }
+    }
+
+    if (Row.get(0) == Row.get(1)) {
+      if (Row.get(1) == Row.get(2)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  public boolean checkWinner()
+  {
+    /*
+      R0: 0 1 2
+      R1: 0 1 2
+      R2: 0 1 2
+
+      check any rows: R0: 0 1 2 / R1: 0 1 2 / R2: 0 1 2
+      check columns: R0-2: 0 0 0 / 1 1 1 / 2 2 2
+      check diagonals: R0-2: 0 1 2 / R2-0: 0 1 2
+    */
+
+    boolean winner = checkRowWinner(R0);
+    winner |= checkRowWinner(R1);
+    winner |= checkRowWinner(R2);
+    return winner;
+  }
+
   private void updateCell(ArrayList<Integer> rowList, int column, int value)
   {
     if (rowList.get(column) == 0) {
@@ -66,7 +90,7 @@ class TicTacToeBoard
       updateCell(R0, column, value);
     }
     else if (row == 1) {
-      updateCell(R2, column, value);
+      updateCell(R1, column, value);
     }
     else if (row == 2) {
       updateCell(R2, column, value);

@@ -10,23 +10,20 @@ class TicTacToe extends GameTemplate
     board = new TicTacToeBoard();
     board.init();
   }
-  private boolean checkForWin()
-  {
-    return true;
-  }
-  private void printWinner()
-  {
-    System.out.println("Player " + currentPlayer + " WON!");
-  }
   public void takeTurn()
   {
     int turn = 0;
+    UnitTest userInput = new UnitTest();
     while (turn < maxNumTurns) {
 
       System.out.println("Tac Take Turn: " + turn);
+
+      TicTacToeCell cell = userInput.test1(turn);
+      board.updateBoard(cell.row, cell.column, cell.value);
+
       printBoard();
 
-      boolean winner = checkForWin();
+      boolean winner = checkWinner();
       if (winner) {
         printWinner();
         break;
@@ -41,6 +38,14 @@ class TicTacToe extends GameTemplate
     System.out.println("Toe End Game");
   }
 
+  private boolean checkWinner()
+  {
+    return board.checkWinner();
+  }
+  private void printWinner()
+  {
+    System.out.println("Player " + currentPlayer + " WON!");
+  }
   public void printBoard()
   {
     System.out.println("Current board...");
