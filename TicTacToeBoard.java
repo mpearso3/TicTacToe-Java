@@ -77,6 +77,41 @@ class TicTacToeBoard
     }
     return false;
   }
+  public boolean checkDiagonalWinner1()
+  {
+    Integer value0 = R0.get(0);
+    Integer value1 = R1.get(1);
+    Integer value2 = R2.get(2);
+
+    if ((value0 == 0) || (value1 == 0) || (value2 == 0)) {
+      return false;
+    }
+
+    if (value0 == value1) {
+      if (value1 == value2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean checkDiagonalWinner2()
+  {
+    Integer value3 = R0.get(2);
+    Integer value4 = R1.get(1);
+    Integer value5 = R2.get(0);
+
+    if ((value3 == 0) || (value4 == 0) || (value5 == 0)) {
+      return false;
+    }
+
+    if (value3 == value4) {
+      if (value4 == value5) {
+        return true;
+      }
+    }
+    return false;
+  }
   public boolean checkWinner()
   {
     /*
@@ -96,6 +131,9 @@ class TicTacToeBoard
     winner |= checkColumnWinner(0);
     winner |= checkColumnWinner(1);
     winner |= checkColumnWinner(2);
+
+    winner |= checkDiagonalWinner1();
+    winner |= checkDiagonalWinner2();
     return winner;
   }
 
