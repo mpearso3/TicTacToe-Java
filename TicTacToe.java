@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class TicTacToe extends GameTemplate
 {
   public void startGame()
@@ -6,31 +8,47 @@ class TicTacToe extends GameTemplate
     System.out.println("Num Players: " + numPlayers);
     System.out.println("Max Num Turns: " + maxNumTurns);
     System.out.println("");
-
-    board = new TicTacToeBoard();
-    board.init();
   }
   public void takeTurn()
   {
-    int turn = 0;
-    UnitTest userInput = new UnitTest();
-    while (turn < maxNumTurns) {
+    ArrayList<UnitTestTemplate> tests = new ArrayList<UnitTestTemplate>();
+    tests.add(new UnitTest1());
+    tests.add(new UnitTest2());
+    tests.add(new UnitTest3());
 
-      System.out.println("Tac Take Turn: " + turn);
+    int testIndex = 0;
+    for (UnitTestTemplate test : tests) {
 
-      TicTacToeCell cell = userInput.test1(turn);
-      board.updateBoard(cell.row, cell.column, cell.value);
+      System.out.println("---------------------------------------------");
+      System.out.println("STARTING TEST " + testIndex);
 
-      printBoard();
+      board = new TicTacToeBoard();
+      board.init();
+      currentPlayer = 0;
 
-      boolean winner = checkWinner();
-      if (winner) {
-        printWinner();
-        break;
+      int turn = 0;
+      while (turn < maxNumTurns) {
+
+        System.out.println("Tac Take Turn: " + turn);
+
+        TicTacToeCell cell = test.run(turn);
+        board.updateBoard(cell.row, cell.column, cell.value);
+
+        printBoard();
+
+        boolean winner = checkWinner();
+        if (winner) {
+          printWinner();
+          break;
+        }
+
+        turn++;
+        currentPlayer ^= 1;
       }
-
-      turn++;
-      currentPlayer ^= 1;
+      System.out.println("");
+      System.out.println("END TEST " + testIndex);
+      System.out.println("---------------------------------------------");
+      testIndex++;
     }
   }
   public void endGame()
