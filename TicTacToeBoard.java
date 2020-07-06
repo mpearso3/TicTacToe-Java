@@ -60,6 +60,23 @@ class TicTacToeBoard
     }
     return false;
   }
+  private boolean checkColumnWinner(Integer column)
+  {
+    Integer value0 = R0.get(column);
+    Integer value1 = R1.get(column);
+    Integer value2 = R2.get(column);
+
+    if ((value0 == 0) || (value1 == 0) || (value2 == 0)) {
+      return false;
+    }
+
+    if (value0 == value1) {
+      if (value1 == value2) {
+        return true;
+      }
+    }
+    return false;
+  }
   public boolean checkWinner()
   {
     /*
@@ -75,6 +92,10 @@ class TicTacToeBoard
     boolean winner = checkRowWinner(R0);
     winner |= checkRowWinner(R1);
     winner |= checkRowWinner(R2);
+
+    winner |= checkColumnWinner(0);
+    winner |= checkColumnWinner(1);
+    winner |= checkColumnWinner(2);
     return winner;
   }
 

@@ -15,6 +15,9 @@ class TicTacToe extends GameTemplate
     tests.add(new UnitTest1());
     tests.add(new UnitTest2());
     tests.add(new UnitTest3());
+    tests.add(new UnitTest4());
+    tests.add(new UnitTest5());
+    tests.add(new UnitTest6());
 
     int testIndex = 0;
     for (UnitTestTemplate test : tests) {
